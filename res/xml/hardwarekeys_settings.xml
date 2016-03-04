@@ -26,6 +26,12 @@
                 android:title="@string/keys_enable_custom_title"
                 android:summary="@string/keys_enable_custom_summary" />
 
+            <com.android.settings.slim.SystemSettingSwitchPreference
+                android:key="app_switch_swap_buttons"
+                android:title="@string/hardware_keys_app_switch_swap_button_title"
+                android:summary="@string/hardware_keys_app_switch_swap_button_summary"
+                android:defaultValue="false" />
+
             <com.android.settings.tipsy.ButtonBacklightBrightness
                 android:key="button_backlight"
                 android:title="@string/button_backlight_title"

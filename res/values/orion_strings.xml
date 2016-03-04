@@ -562,5 +562,9 @@
     <string name="backlight_timeout_unlimited">Don\'t turn off</string>
     <string name="backlight_summary_disabled">Disabled</string>
     <string name="backlight_summary_enabled_with_timeout">Enabled for <xliff:g id="timeout">%s</xliff:g></string>
-    <string name="backlight_summary_enabled">Enabled</string>    
+    <string name="backlight_summary_enabled">Enabled</string>
+
+    <!-- Swap recents and back buttons -->
+    <string name="hardware_keys_app_switch_swap_button_title">Swap hw buttons</string>
+    <string name="hardware_keys_app_switch_swap_button_summary">Swap the order of recents and back buttons</string>    
 </resources>
