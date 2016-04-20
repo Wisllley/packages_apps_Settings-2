@@ -18,25 +18,41 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <PreferenceCategory
+                android:key="keys_hwkeys"
+                android:title="@string/keys_hwkeys_title" >
+
+            <SwitchPreference
+                android:key="disable_hardware_keys"
+                android:title="@string/keys_disable_hwkeys_title"
+                android:summary="@string/keys_disable_hwkeys_summary"
+		android:disableDependentsState="true" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
                 android:key="keys_cat"
                 android:title="@string/keys_bindings_title" >
 
+	    <!--
             <SwitchPreference
                 android:key="enable_hardware_keys"
                 android:title="@string/hardware_keys_enable_title"
                 android:summary="@string/hardware_keys_enable_summary"
                 android:defaultValue="true" />
+            -->
 
             <SwitchPreference
                 android:key="enable_hardware_rebind"
                 android:title="@string/keys_enable_custom_title"
-                android:summary="@string/keys_enable_custom_summary" />
+                android:summary="@string/keys_enable_custom_summary" 
+                android:dependency="disable_hardware_keys" />
 
             <com.android.settings.slim.SystemSettingSwitchPreference
                 android:key="app_switch_swap_buttons"
                 android:title="@string/hardware_keys_app_switch_swap_button_title"
                 android:summary="@string/hardware_keys_app_switch_swap_button_summary"
-                android:defaultValue="false" />
+                android:defaultValue="false" 
+                android:dependency="disable_hardware_keys" />
 
             <com.android.settings.tipsy.ButtonBacklightBrightness
                 android:key="button_backlight"

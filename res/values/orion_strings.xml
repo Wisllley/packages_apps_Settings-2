@@ -49,7 +49,10 @@
   <string name="hardware_keys_appswitch_key_title">Recents button</string>
   <string name="volbtn_wake_device_title">Wake up device</string>
   <string name="volbtn_wake_device_summary">Pressing either volume button will wake your device</string>
-
+  <string name="keys_hwkeys_title">Navigation Keys</string>
+  <string name="keys_disable_hwkeys_title">Disable navigation keys</string> 
+  <string name="keys_disable_hwkeys_summary">Disable navigation bar keys completely</string>
+ 
     <!-- Hardware keys -->
     <string name="button_keys_title">Hardware Buttons</string>
     <string name="keys_bindings_title">Key actions</string>

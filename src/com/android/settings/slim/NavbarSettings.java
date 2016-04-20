@@ -25,6 +25,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+import com.android.settings.slim.HardwareKeysSettings;
+import android.widget.Toast;
+
 import com.android.internal.util.slim.DeviceUtils;
 import com.android.internal.util.slim.Action;
 
@@ -52,6 +55,8 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
     PreferenceScreen mButtonPreference;
     PreferenceScreen mStyleDimenPreference;
     SwitchPreference mStatusBarImeArrows;
+
+    Toast mNavbarVisibilityToast;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,6 +161,32 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
             mMenuDisplayLocation.setEnabled(mNavBarMenuDisplayValue != 1);
             return true;
         } else if (preference == mEnableNavigationBar) {
+            boolean showing = ((Boolean)newValue);
+	    // Prema Chand Alugu (premaca@gmail.com)
+	    // We need to make sure the Navigation Bar presence if we are
+	    // disabling Hardware Keys. At least one of them should be present
+	    // for the device operation.
+	    // Not checking Overlay for Hardware Keys, because I assume if we
+	    // can do disable Navigation Bar, then Hardware Keys should
+	    // have been present on the device.
+	    // The devices having Navigation Keys only should not be able to
+	    // disable Navigation Bar.
+	    // In either of the cases, overlay for Hardware Keys is not
+	    // necessary
+	    boolean disableHardwareKeys = Settings.System.getInt(getContentResolver(),
+			    Settings.System.DISABLE_HARDWARE_KEYS, 0) == 1;
+	    if ((disableHardwareKeys) && (!showing)) {
+		    // check only while disabling the Navbar
+                    if (mNavbarVisibilityToast != null) {
+                        mNavbarVisibilityToast.cancel();
+                    }
+		    mNavbarVisibilityToast = Toast.makeText(getActivity(), 
+				    "Make sure Hardware Keys present",
+				    Toast.LENGTH_LONG);
+		    mNavbarVisibilityToast.show();
+	    	return false;
+	    }
+
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_SHOW,
                     ((Boolean) newValue) ? 1 : 0);
@@ -178,6 +209,7 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        mNavbarVisibilityToast = null;
     }
 
 }
