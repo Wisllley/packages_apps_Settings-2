@@ -213,7 +213,8 @@
     <string name="shortcut_action_recent">Recents</string>
     <string name="shortcut_action_power">Screen Off</string>
     <string name="shortcut_action_search">Search in app</string>
-    <string name="shortcut_action_now_on_tap">Now on Tap</string>
+    <string name="shortcut_action_now_on_tap">Now on Tap</string>    
+    <string name="shortcut_action_nowontap">Google Now / Now on Tap</string>
     <string name="shortcut_action_ring_vib">Ring/Vib</string>
     <string name="shortcut_action_ring_silent">Ring/Silent</string>
     <string name="shortcut_action_ring_vib_silent">Ring/Vib/Silent</string>
