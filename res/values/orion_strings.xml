@@ -477,4 +477,7 @@
     <string name="restart_system_ui_summary"> Restart SystemUI to apply statusbar changes</string>
     <string name="restart_system_ui_wall_summary"> Restart SystemUI to apply/clear the wallpaper</string>
 
+    <!--Substratum dashboard strings-->
+    <string name="substratum_title">Substratum</string>
+
 </resources>
