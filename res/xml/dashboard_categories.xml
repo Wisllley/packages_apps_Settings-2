@@ -99,17 +99,6 @@
                 android:fragment="com.android.settings.slim.InterfaceSettings"
                 android:title="@string/universe_settings_title"
                 />
-    
-        <!-- Layers -->
-        <dashboard-tile
-                android:id="@+id/bitsyko_layers"
-                android:icon="@drawable/ic_bitsyko_layers"
-                android:title="@string/bitsyko_layers">     
-		<intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.lovejoy777.rroandlayersmanager"
-                android:targetClass="com.lovejoy777.rroandlayersmanager.menu" />
-        </dashboard-tile>
 
     </dashboard-category>
 
