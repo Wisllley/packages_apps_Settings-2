@@ -48,14 +48,22 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
     
+    private static final String KEY_HOME_LONG_PRESS = "hardware_keys_home_long_press";    
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String KEY_VOLUME_WAKE_DEVICE = "volume_key_wake_device";    
 
+    private static final String CATEGORY_HOME = "home_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
-   
+
+    private static final int ACTION_NOTHING = 0;
+    private static final int ACTION_IN_APP_SEARCH = 5;
+    
+    public static final int KEY_MASK_HOME = 0x01;
+
+    private ListPreference mHomeLongPressAction;
     private ListPreference mVolumeKeyCursorControl;
     private SwitchPreference mVolumeKeyWakeControl;
-  
+
     private PreferenceCategory mNavigationPreferencesCat;
 
     private Handler mHandler;
@@ -70,12 +78,24 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
+        final int deviceKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        final boolean hasHomeKey = (deviceKeys & KEY_MASK_HOME) != 0;
         boolean hasAnyBindableKey = false;
         
         final PreferenceCategory volumeCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_VOLUME);
 
         mHandler = new Handler();
+
+        if (hasHomeKey) {
+            int defaultLongPressAction = res.getInteger(
+                    com.android.internal.R.integer.config_longPressOnHomeBehavior);
+            if (defaultLongPressAction < ACTION_NOTHING ||
+                    defaultLongPressAction > ACTION_IN_APP_SEARCH) {
+                defaultLongPressAction = ACTION_NOTHING;
+            }
  
         if (Utils.hasVolumeRocker(getActivity())) {
             int cursorControlAction = Settings.System.getInt(resolver,
@@ -85,9 +105,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             int wakeControlAction = Settings.System.getInt(resolver,
                     Settings.System.VOLUME_ROCKER_WAKE, 0);
             mVolumeKeyWakeControl = initSwitch(KEY_VOLUME_WAKE_DEVICE, (wakeControlAction == 1));
-         }else {
+        } else {
             prefScreen.removePreference(volumeCategory);
-        }
+         	}
+       	}
     }
     
     private SwitchPreference initSwitch(String key, boolean checked) {
