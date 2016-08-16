@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.android.internal.util.slim.DeviceUtils;
 import com.android.internal.util.slim.Action;
+import com.android.settings.util.Helpers;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
@@ -141,6 +142,7 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
         mMenuDisplayLocation.setEnabled(show
             && mNavBarMenuDisplayValue != 1);
         mStatusBarImeArrows.setEnabled(show);
+        Helpers.restartSystemUI();
     }
     
     @Override
