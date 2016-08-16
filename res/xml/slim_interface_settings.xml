@@ -36,7 +36,7 @@
 
      <PreferenceScreen
          android:key="button_settings"
-         android:title="@string/button_pref_title"
+         android:title="@string/hardware_keys_volume_keys_title"
          android:fragment="com.android.settings.ButtonSettings" />
                                 
       <PreferenceScreen
